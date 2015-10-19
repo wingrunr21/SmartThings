@@ -217,6 +217,13 @@ def initialize() {
 	}
 	schedule("0 0/${delay} * * * ?", takeAction)	
 
+  //Subscribes to sunrise and sunset event to trigger refreshes
+	subscribe(location, "sunrise", takeAction)
+	subscribe(location, "sunset", takeAction)
+	subscribe(location, "mode", takeAction)
+	subscribe(location, "sunriseTime", takeAction)
+	subscribe(location, "sunsetTime", takeAction)
+
 	//Subscribe to events from contact sensor
 	if (contactSensorTrigger) {
 		subscribe(contactSensorTrigger, "contact", takeAction)
