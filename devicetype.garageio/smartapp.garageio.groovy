@@ -20,6 +20,8 @@
  *
  */
  
+*  GarageioServiceMgr v1.2
+*     v1.2 - Add ability to trigger a refresh based on a contact/acceleration sensor. Refresh at sunrise/sunset.
 import groovy.json.JsonSlurper
  
 definition(
