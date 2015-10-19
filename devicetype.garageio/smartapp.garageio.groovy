@@ -121,6 +121,10 @@ def otherSettings() {
 				false
 			input "phoneNumber", "phone", title: "Send a text message?", required: false
 		}
+    section("Advanced Options") {
+      input(name: "contactSensorTrigger", title: "Contact Sensor to trigger refresh ", type: "capability.contactSensor", required: "false", multiple: "true")
+			input(name: "accelerationSensorTrigger", title: "Acceleration Sensor to trigger refresh ", type: "capability.accelerationSensor", required: "false", multiple: "true")
+    }
 		section([mobileOnly:true]) {
 			label title: "Assign a name for this SmartApp", required: false
 		}
@@ -212,6 +216,16 @@ def initialize() {
  		return
 	}
 	schedule("0 0/${delay} * * * ?", takeAction)	
+
+	//Subscribe to events from contact sensor
+	if (contactSensorTrigger) {
+		subscribe(contactSensorTrigger, "contact", takeAction)
+	}
+
+	//Subscribe to events from contact sensor
+	if (threeAxisSensorTrigger) {
+		subscribe(accelerationSensorTrigger, "acceleration", takeAction)
+	}
 }
 
 def takeAction() {
